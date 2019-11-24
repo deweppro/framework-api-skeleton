@@ -1,0 +1,71 @@
+debug: true
+domain: localhost
+response: application/json
+allowHeaders:
+    - X-JWT
+
+#-------------------------------------------
+session:
+    _: null
+    lifetime: 3600
+
+#-------------------------------------------
+routes: \App\Routes
+
+#-------------------------------------------
+codes:
+    404: \App\HttpCodes::httpCode404
+
+#-------------------------------------------
+console:
+    app.restore: \Dewep\Handlers\Consoles\CreateDirs
+    db.list: \App\Consoles\DBList
+    mq.consumer: \App\Consoles\Consumer
+
+#-------------------------------------------
+middleware:
+    before:
+        cookie: &CookieUserAuth
+            _: \Dewep\Middleware\Auth\Cookies
+            name: sess
+            secret: 'demo'
+            exp: 6000000
+            domain: localhost
+
+    after:
+        cookie: *CookieUserAuth
+
+
+#-------------------------------------------
+providers:
+    logger:
+        _: \Dewep\Providers\LoggerProvider
+        debug: true
+        name: app
+        filename: app.log
+
+    db:
+        _: \Dewep\Providers\MysqlProvider
+        host: 'mysql'
+        port: 3306
+        dbname: 'test'
+        login: 'test'
+        password: 'test'
+
+    twig:
+        _: \Dewep\Providers\TwigProvider
+
+    redis:
+        _: \Dewep\Providers\RedisProvider
+        scheme: 'tcp'
+        host: 'redis'
+        port: 6379
+
+    rmq:
+        _: \App\Providers\RMQProvider
+        debug: true
+        host: 'rabbitmq'
+        port: 5672
+        user: 'test'
+        password: 'test'
+        vhost: '/'

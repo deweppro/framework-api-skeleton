@@ -1,0 +1,57 @@
+{
+    "name": "markus621/deweppro-id",
+    "description": "Platform about eating.",
+    "keywords": [],
+    "license": "proprietary",
+    "type": "project",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^7.2",
+        "ext-PDO": "*",
+        "ext-curl": "*",
+        "ext-dom": "*",
+        "ext-igbinary": "*",
+        "ext-intl": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "ext-simplexml": "*",
+        "google/apiclient": "^2.4",
+        "deweppro/framework": "^3.0",
+        "php-amqplib/php-amqplib": "^2.10"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.5",
+        "phpstan/phpstan": "^0.10"
+    },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/deweppro/framework.git"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "platform": {
+            "php": "7.2.0"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "lint": [
+            "php vendor/bin/phpstan analyse -c phpstan.neon -l max app tests"
+        ],
+        "test": [
+            "php vendor/bin/phpunit"
+        ]
+    }
+}

@@ -1,0 +1,8 @@
+parameters:
+	reportUnmatchedIgnoredErrors: false
+#	ignoreErrors:
+#		- '#Call to an undefined method Illuminate\\#'
+#		- '#function of function call_user_func expects callable#'
+	autoload_directories:
+		- %rootDir%/../../../app
+		- %rootDir%/../../../tests
