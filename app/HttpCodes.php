@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Dewep\Http\Response;
+
 /**
  * Class HttpCodes
  *
@@ -10,13 +12,20 @@ namespace App;
 class HttpCodes
 {
     /**
+     * @param array $error
+     *
      * @return string
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public static function httpCode404(): string
+    public static function httpCode404(array $error): string
     {
-        return DI::twig()->render('404.html.twig', []);
+        return DI::twig()->render(
+            '404.html.twig',
+            [
+                'text' => $error['errorMessage'] ?? 'Error 404',
+            ]
+        );
     }
 }
