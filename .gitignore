@@ -3,4 +3,4 @@
 /.phpunit.result.cache
 /temp/*
 /storage/*
-/ui
+composer.lock
